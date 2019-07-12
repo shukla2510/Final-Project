@@ -1,0 +1,30 @@
+* what is VPC, VPC peering, ssh into instances
+* depenency injection
+* kafka working
+* pubsub working
+* sparkk submit options
+* explode function
+* window function
+* rank function
+* explain project properly
+* map reduce working
+* yarn functionality (startup)
+* NIFI
+* hbase
+* d/w no sql and sql
+* benifites of using mongo engine
+* what is external IP, meritts and demerits of using it
+* what is internal IP
+* explain project deployment strategies
+* sqoop without primary key new data import
+* hive bucketing
+* hive partitioning
+* bucketing on partitioned table
+* define no.  of reducer
+* how will you debug spark job
+* preamptible  instances
+* d/w image and snapshots in gcp
+* why HDP not cloudera
+* read parameter in spark job
+* what is data proc and emr
+* migrate cluster to data proc
