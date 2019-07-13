@@ -28,7 +28,7 @@ program_tab=progpar.withColumn("col1", split(col("value"), "\\;").getItem(0)) \
 .withColumn("Mega_Cities_Universe", split(col("value"), "\\;").getItem(19)) \
 .withColumn("Mega_Cities_15+", split(col("value"), "\\;").getItem(20)) \
 .withColumn("Mega_Cities_Female_15+", split(col("value"), "\\;").getItem(21))
- 
+print('abc')
 program_tab_stag = program_tab.drop('value')
 program_tab_final=program_tab_stag.where((program_tab_stag.col1 != '" "') & (program_tab_stag.col1 !='"[TOTAL]"'))
 program_tab_final.write.parquet("gs://b-refined-zone/program_data/")
