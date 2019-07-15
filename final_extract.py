@@ -229,7 +229,7 @@ if __name__ == '__main__':
     chardf = FeatureDataExtract().character(framedf, json_name)
     chardf.write.mode('append').parquet('gs://{}/character/'.format(refined_zone_bucket))
     locdf = FeatureDataExtract().location(framedf, json_name)
-    locdf.show()
+    # locdf.show()
     locdf.write.mode('append').parquet('gs://{}/location/'.format(refined_zone_bucket))
     shotdf = FeatureDataExtract().shotangle(framedf, json_name)
     shotdf.write.mode('append').parquet('gs://{}/shotangle/'.format(refined_zone_bucket))
