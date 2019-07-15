@@ -1,4 +1,5 @@
 import sys
+import datetime
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName('Extarct Feature Data').getOrCreate()
 import pyspark.sql.functions as F
@@ -18,7 +19,10 @@ class FeatureDataExtract:
         cameradf = scenedf.select(explode(scenedf.SCENE.CAMERA_CUT).alias('CAMERA_CUT'))
         framedf = cameradf.select(explode(cameradf.CAMERA_CUT.FRAME).alias('FRAME')).select('FRAME.*')
         return framedf, json_name
-        
+    
+
+
+
     def update_time_stamp(col):
         col1 = col.rsplit('.',1)[0]
         return col1
@@ -38,6 +42,14 @@ class FeatureDataExtract:
         end_time = endtimedf.withColumn('END_TIME', self.update_time_stamp_udf(endtimedf.ENDTIME))
         end_time = end_time.drop('ENDTIME')
         return end_time
+
+    def add_time(col,json_name):
+        HHMMSS = [json_name.rsplit('.')[0].rsplit('_',1)[1][i:i+2] for i in range(6) if i%2==0]
+        col_final = col.split(':')
+        s = datetime.timedelta(hours=int(col_final[0]), minutes=int(col_final[1]), seconds=int(col_final[2])) +  datetime.timedelta(hours=int(HHMMSS[0]), minutes=int(HHMMSS[1]), seconds=int(HHMMSS[2]))
+        return str(s)
+
+    add_time_function = F.UserDefinedFunction(add_time, T.StringType())
     
     def character(self, framedf, json_name):
         channel_number = json_name.rsplit('_')[1]
@@ -61,6 +73,7 @@ class FeatureDataExtract:
             return col1
         my_udf = F.UserDefinedFunction(my_func, T.StringType())
         unique_id=start_time.withColumn('unique_id', my_udf(start_time.START_TIME))
+        start_time=start_time.withColumn('START_TIME_MOM', self.add_time_function(start_time.START_TIME, lit(json_name)))
         unique_id=unique_id.drop('STARTTIME')
         unique_id=unique_id.drop('START_TIME')
         
@@ -84,10 +97,12 @@ class FeatureDataExtract:
             return col1
         my_udf = F.UserDefinedFunction(my_func, T.StringType())
         unique_id=start_time.withColumn('unique_id', my_udf(start_time.START_TIME))
+        start_time=start_time.withColumn('START_TIME_MOM', self.add_time_function(start_time.START_TIME, lit(json_name)))
         unique_id=unique_id.drop('STARTTIME')
         unique_id=unique_id.drop('START_TIME')
         end_time = end_time.drop('ENDTIME')
         start_time = start_time.drop('STARTTIME')
+        
         Locationdf = Locationdf.join(start_time,['id']).join(end_time,['id']).join(unique_id,['id']).drop('id')
         return Locationdf
     
@@ -106,6 +121,7 @@ class FeatureDataExtract:
             return col1
         my_udf = F.UserDefinedFunction(my_func, T.StringType())
         unique_id=start_time.withColumn('unique_id', my_udf(start_time.START_TIME))
+        start_time=start_time.withColumn('START_TIME_MOM', self.add_time_function(start_time.START_TIME, lit(json_name)))
         unique_id=unique_id.drop('STARTTIME')
         unique_id=unique_id.drop('START_TIME')
         end_time = end_time.drop('ENDTIME')
@@ -128,6 +144,7 @@ class FeatureDataExtract:
             return col1
         my_udf = F.UserDefinedFunction(my_func, T.StringType())
         unique_id=start_time.withColumn('unique_id', my_udf(start_time.START_TIME))
+        start_time=start_time.withColumn('START_TIME_MOM', self.add_time_function(start_time.START_TIME, lit(json_name)))
         unique_id=unique_id.drop('STARTTIME')
         unique_id=unique_id.drop('START_TIME')
         end_time = end_time.drop('ENDTIME')
@@ -153,6 +170,7 @@ class FeatureDataExtract:
             return col1
         my_udf = F.UserDefinedFunction(my_func, T.StringType())
         unique_id=start_time.withColumn('unique_id', my_udf(start_time.START_TIME))
+        start_time=start_time.withColumn('START_TIME_MOM', self.add_time_function(start_time.START_TIME, lit(json_name)))
         unique_id=unique_id.drop('STARTTIME')
         unique_id=unique_id.drop('START_TIME')
         end_time = end_time.drop('ENDTIME')
@@ -191,6 +209,7 @@ class FeatureDataExtract:
             return col1
         my_udf = F.UserDefinedFunction(my_func, T.StringType())
         unique_id=start_time.withColumn('unique_id', my_udf(start_time.START_TIME))
+        start_time=start_time.withColumn('START_TIME_MOM', self.add_time_function(start_time.START_TIME, lit(json_name)))
         unique_id=unique_id.drop('STARTTIME')
         unique_id=unique_id.drop('START_TIME')
         end_time = end_time.drop('ENDTIME')
@@ -210,6 +229,7 @@ if __name__ == '__main__':
     chardf = FeatureDataExtract().character(framedf, json_name)
     chardf.write.mode('append').parquet('gs://{}/character/'.format(refined_zone_bucket))
     locdf = FeatureDataExtract().location(framedf, json_name)
+    locdf.show()
     locdf.write.mode('append').parquet('gs://{}/location/'.format(refined_zone_bucket))
     shotdf = FeatureDataExtract().shotangle(framedf, json_name)
     shotdf.write.mode('append').parquet('gs://{}/shotangle/'.format(refined_zone_bucket))
@@ -219,5 +239,3 @@ if __name__ == '__main__':
     agedf.write.mode('append').parquet('gs://{}/agegender/'.format(refined_zone_bucket))
     colordf = FeatureDataExtract().color(framedf, json_name)
     colordf.write.mode('append').parquet('gs://{}/color/'.format(refined_zone_bucket))
-
-
