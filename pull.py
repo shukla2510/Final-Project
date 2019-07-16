@@ -33,6 +33,11 @@ def poll_notifications(project, subscription_name, raw_bucket, refined_bucket, j
             print(cmd)
             returned_value = os.system(cmd)
             print('returned_value : ', returned_value)
+        else if 'program' in object_id.lower():
+            cmd = "spark-submit {} {} {} {}".format(program_job_path, str(file_path), raw_bucket, refined_bucket)
+            print(cmd)
+            returned_value = os.system(cmd)
+            print('returned_value : ', returned_value)    
         else:
             cmd = "spark-submit {} {} {} {}".format(job_path, str(file_path), raw_bucket, refined_bucket)
             print(cmd)
