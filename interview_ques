@@ -28,3 +28,5 @@
 * read parameter in spark job
 * what is data proc and emr
 * migrate cluster to data proc
+* optimizing joins in dataframes
+* defination of RDD, dataframe datasets and difference
