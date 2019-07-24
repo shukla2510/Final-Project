@@ -62,6 +62,7 @@ class FeatureDataExtract:
         .withColumn('HEIGHT',chardf.QUALITY_PARAMETER.HEIGHT)\
         .withColumn('PIXEL_COUNT',chardf.QUALITY_PARAMETER.PIXEL_COUNT)\
         .withColumn('CHANNEL_NUMBER', lit(channel_number))\
+        .withColumn('air_date',lit(json_name[6:8]+str('-')+str(json_name[4:6])+str('-')+str(json_name[0:4])))\
         .drop('PREDICTION','QUALITY_PARAMETER')
         
         characterDF=characterDF.withColumn("id", monotonically_increasing_id())
@@ -89,6 +90,7 @@ class FeatureDataExtract:
         .withColumn('LOCATION_LABEL',Locationdf.LABEL)\
         .withColumn("id", monotonically_increasing_id())\
         .withColumn('CHANNEL_NUMBER', lit(channel_number))\
+        .withColumn('air_date',lit(json_name[6:8]+str('-')+str(json_name[4:6])+str('-')+str(json_name[0:4])))\
         .drop('CONFIDENCE','LABEL')
         start_time = self.get_starttime(framedf)
         end_time = self.get_endtime(framedf)
@@ -113,6 +115,7 @@ class FeatureDataExtract:
         .withColumn('SHOT_ANGLE_LABEL', shotangledf.LABEL)\
         .withColumn("id", monotonically_increasing_id())\
         .withColumn('CHANNEL_NUMBER', lit(channel_number))\
+        .withColumn('air_date',lit(json_name[6:8]+str('-')+str(json_name[4:6])+str('-')+str(json_name[0:4])))\
         .drop('CONFIDENCE','LABEL')
         start_time = self.get_starttime(framedf)
         end_time = self.get_endtime(framedf)
@@ -136,6 +139,7 @@ class FeatureDataExtract:
         .withColumn('SPEECH_LABEL',speechdf.LABEL)\
         .withColumn("id", monotonically_increasing_id())\
         .withColumn('CHANNEL_NUMBER', lit(channel_number))\
+        .withColumn('air_date',lit(json_name[6:8]+str('-')+str(json_name[4:6])+str('-')+str(json_name[0:4])))\
         .drop('CONFIDENCE','LABEL')
         start_time = self.get_starttime(framedf)
         end_time = self.get_endtime(framedf)
@@ -162,6 +166,7 @@ class FeatureDataExtract:
         .withColumn('PIXEL_COUNT',agedf.QUALITY_PARAMETER.PIXEL_COUNT)\
         .withColumn("id", monotonically_increasing_id())\
         .withColumn('CHANNEL_NUMBER', lit(channel_number))\
+        .withColumn('air_date',lit(json_name[6:8]+str('-')+str(json_name[4:6])+str('-')+str(json_name[0:4])))\
         .drop('PREDICTION','QUALITY_PARAMETER')
         start_time = self.get_starttime(framedf)
         end_time = self.get_endtime(framedf)
@@ -196,6 +201,7 @@ class FeatureDataExtract:
         colordfCT = colordf2.withColumn('COLOR_TEMPERATURE_CONFIDENCE', colordf2.CONFIDENCE)\
         .withColumn('COLOR_TEMPERATURE_LABEL', colordf2.LABEL)\
         .withColumn("id", monotonically_increasing_id())\
+        .withColumn('air_date',lit(json_name[6:8]+str('-')+str(json_name[4:6])+str('-')+str(json_name[0:4])))\
         .drop('CONFIDENCE', 'LABEL')
         
         colordfCL = colordfCL.join(colordfCP, ['id'])
