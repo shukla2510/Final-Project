@@ -8,10 +8,10 @@ from pyspark.sql.functions import lit
 
 class program_data:
     def save_data(self, file_name, raw_zone_bucket, refined_zone_bucket):
-        pddf = spark.read.option("delimiter",";").csv(file_name, header=True)
-        json_name = file_name.rsplit('.', 1)[0].rsplit('/', 1)[1]
-        raw_zone_path = 'gs://{}/{}/'.format(raw_zone_bucket, json_name)
-        pddf.write.mode('append').parquet(raw_zone_path)
+        progpar = spark.read.option("delimiter",";").csv(file_name, header=True)
+        #json_name = file_name.rsplit('.', 1)[0].rsplit('/', 1)[1]
+        #raw_zone_path = 'gs://{}/{}/'.format(raw_zone_bucket, json_name)
+        #pddf.write.mode('append').parquet(raw_zone_path)
         progpar = spark.read.parquet(raw_zone_path)
 
         program_tab=progpar.withColumnRenamed('Channel','Channel')\
