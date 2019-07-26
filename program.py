@@ -12,7 +12,7 @@ class program_data:
         #json_name = file_name.rsplit('.', 1)[0].rsplit('/', 1)[1]
         #raw_zone_path = 'gs://{}/{}/'.format(raw_zone_bucket, json_name)
         #pddf.write.mode('append').parquet(raw_zone_path)
-        progpar = spark.read.parquet(raw_zone_path)
+        #progpar = spark.read.parquet(raw_zone_path)
 
         program_tab=progpar.withColumnRenamed('Channel','Channel')\
         .withColumnRenamed('Date','Episode_Date')\
