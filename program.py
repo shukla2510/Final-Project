@@ -54,4 +54,4 @@ if __name__ == '__main__':
     print(refined_zone_bucket)
     print('***************************************************************')
     print(raw_zone_bucket)
-    mom_data().save_data(file_name, raw_zone_bucket, refined_zone_bucket)
+    program_data().save_data(file_name, raw_zone_bucket, refined_zone_bucket)
