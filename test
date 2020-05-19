@@ -1,29 +1,64 @@
-https://docs.google.com/spreadsheets/d/11qz3fgEghHppIOlWZPESfenihbPDCBvDHoBjXCFLhqM/edit#gid=0
-select * from POC_Data_Final_
---CUS_MAIL_ID_1
-select count(*) from POC_Data_Final_ where CUS_MAIL_ID_1 not like '%_@%.%' and CUS_MAIL_ID_1 not like '' --Incorrect 12
-select count(*) from POC_Data_Final_ where CUS_MAIL_ID_1  like '%_@%.%' -- not Null 107071
-select count(*) from POC_Data_Final_ where CUS_MAIL_ID_1 like ''  --Null 118565
---CORRECT_MOBILE
-select count(*) from POC_Data_Final_ where CORRECT_MOBILE like '%_' --Not Null 145468
-select count(*) from POC_Data_Final_ where CORRECT_MOBILE like '' -- Null 80180
---PAN_CARD_ID
-select count(*) from POC_Data_Final_ where PAN_CARD_ID like '' -- Null 55517
-select count(*) from POC_Data_Final_ where PAN_CARD_ID like '%_' -- Not Null 170131
-select count(DISTINCT (PAN_CARD_ID)) from POC_Data_Final_ where PAN_CARD_ID not like '' -- distinct records 60716
+SELECT * from POC_Data_Final_Edited 
+
 --CUS_DOB
-select count(*) from POC_Data_Final_ where CUS_DOB like '' -- null 439
-select count(*) from POC_Data_Final_ where CUS_DOB not like '' -- not null 225209
-
-SELECT COUNT(*) from POC_Data_Final_ where CLI_GNDR like ''
-
-
-
-
-
-
-
-
-
+select count(*) from POC_Data_Final_Edited where CUS_DOB like '' -- null 439
+select count(*) from POC_Data_Final_Edited where CUS_DOB not like '' -- not null 225209
+--CORRECT_MOBILE
+select count(*) from POC_Data_Final_Edited where CORRECT_MOBILE like '%_' --Not Null 145468
+select count(*) from POC_Data_Final_Edited where CORRECT_MOBILE like '' -- Null 80180
+--CUS_MAIL_ID_1
+select count(*) from POC_Data_Final_Edited where CUS_MAIL_ID_1 not like '%_@%.%' and CUS_MAIL_ID_1 not like '' --Incorrect 12
+select count(*) from POC_Data_Final_Edited where CUS_MAIL_ID_1  like '%_@%.%' -- not Null 107071
+select count(*) from POC_Data_Final_Edited where CUS_MAIL_ID_1 like ''  --Null 118565
+--PAN_CARD_ID
+select count(*) from POC_Data_Final_Edited where PAN_CARD_ID like '' -- Null 55517
+select count(*) from POC_Data_Final_Edited where PAN_CARD_ID like '%_' -- Not Null 170131
+select count(DISTINCT (PAN_CARD_ID)) from POC_Data_Final_Edited where PAN_CARD_ID not like '' -- distinct records 60716
+--CLI_GNDR
+SELECT COUNT(*) from POC_Data_Final_Edited where CLI_GNDR not like '' -- NOt null 225642
+SELECT COUNT(*) from POC_Data_Final_Edited where CLI_GNDR like '' -- Null 6
+--CLI_MOBILE_NUMBER
+SELECT COUNT(*) from POC_Data_Final_Edited where CLI_MOBILE_NUMBER like '' --84101
+SELECT COUNT(*) from POC_Data_Final_Edited where CLI_MOBILE_NUMBER not like '' --141547
+--ADHAR_NUMBER
+SELECT COUNT(*) from POC_Data_Final_Edited where ADHAR_NUMBER like '' --Null 141508
+SELECT COUNT(*) from POC_Data_Final_Edited where ADHAR_NUMBER not like '' --  Not Null 84140
+SELECT count(DISTINCT (ADHAR_NUMBER )) from POC_Data_Final_Edited where ADHAR_NUMBER not like '' --Distinct 3743
+--PAN_CARD_1
+SELECT COUNT(*) from POC_Data_Final_Edited where PAN_CARD_1 like '' --Null 141501
+SELECT COUNT(*) from POC_Data_Final_Edited where PAN_CARD_1 like '%_' --  Not Null 80147
+SELECT count(DISTINCT (PAN_CARD_1 )) from POC_Data_Final_Edited where PAN_CARD_1 not like '' --Distinct 32348
+--PAN_CARD_2
+SELECT COUNT(*) from POC_Data_Final_Edited where PAN_CARD_2 like '' --Null 150442
+SELECT COUNT(*) from POC_Data_Final_Edited where PAN_CARD_2 not like '' --  Not Null 75206
+SELECT count(DISTINCT (PAN_CARD_2 )) from POC_Data_Final_Edited where PAN_CARD_2 not like '' --Distinct 34868
+--Aadhar_1
+SELECT COUNT(*) from POC_Data_Final_Edited where Aadhar_1 like '' --Null 204325
+SELECT COUNT(*) from POC_Data_Final_Edited where Aadhar_1 not like '' --  Not Null 21323
+SELECT count(DISTINCT (Aadhar_1 )) from POC_Data_Final_Edited where Aadhar_1 not like '' --Distinct 5891
+--Passport_1
+SELECT COUNT(*) from POC_Data_Final_Edited where Passport_1 like '' --Null 223634
+SELECT COUNT(*) from POC_Data_Final_Edited where Passport_1 not like '' --  Not Null 2014
+SELECT count(DISTINCT ( Passport_1)) from POC_Data_Final_Edited where Passport_1 not like '' --Distinct 568
+--Passport_2
+SELECT COUNT(*) from POC_Data_Final_Edited where Passport_2 like '' --Null 221770
+SELECT COUNT(*) from POC_Data_Final_Edited where Passport_2 not like '' --  Not Null 3878
+SELECT count(DISTINCT (Passport_2 )) from POC_Data_Final_Edited where Passport_2 not like '' --Distinct-- 590
+--"Driving License_1"
+SELECT COUNT(*) from POC_Data_Final_Edited where "Driving License_1" like '' --Null 225331
+SELECT COUNT(*) from POC_Data_Final_Edited where "Driving License_1" not like '' --  Not Null 317
+SELECT DISTINCT ( "Driving License_1") from POC_Data_Final_Edited where "Driving License_1" not like '' --Distinct-- 127
+--"Driving License_2"
+SELECT COUNT(*) from POC_Data_Final_Edited where "Driving License_2" like '' --Null 221466
+SELECT COUNT(*) from POC_Data_Final_Edited where "Driving License_2" not like '' --  Not Null 4182
+SELECT count(DISTINCT ( "Driving License_2")) from POC_Data_Final_Edited where "Driving License_2" not like '' --Distinct--124
+--VoterID_1
+SELECT COUNT(*) from POC_Data_Final_Edited where VoterID_1 like '' --Null 224667
+SELECT COUNT(*) from POC_Data_Final_Edited where VoterID_1 not like '' --  Not Null 981
+SELECT count(DISTINCT (VoterID_1 )) from POC_Data_Final_Edited where VoterID_1 not like '' --Distinct--479
+--VoterID_2
+SELECT COUNT(*) from POC_Data_Final_Edited where VoterID_2 like '' --Null 219225
+SELECT COUNT(*) from POC_Data_Final_Edited where VoterID_2 not like '' --  Not Null 6423
+SELECT count(DISTINCT (VoterID_2 )) from POC_Data_Final_Edited where VoterID_2 not like '' --Distinct 310
 
 
