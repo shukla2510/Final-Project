@@ -1,1 +1,29 @@
 https://docs.google.com/spreadsheets/d/11qz3fgEghHppIOlWZPESfenihbPDCBvDHoBjXCFLhqM/edit#gid=0
+select * from POC_Data_Final_
+--CUS_MAIL_ID_1
+select count(*) from POC_Data_Final_ where CUS_MAIL_ID_1 not like '%_@%.%' and CUS_MAIL_ID_1 not like '' --Incorrect 12
+select count(*) from POC_Data_Final_ where CUS_MAIL_ID_1  like '%_@%.%' -- not Null 107071
+select count(*) from POC_Data_Final_ where CUS_MAIL_ID_1 like ''  --Null 118565
+--CORRECT_MOBILE
+select count(*) from POC_Data_Final_ where CORRECT_MOBILE like '%_' --Not Null 145468
+select count(*) from POC_Data_Final_ where CORRECT_MOBILE like '' -- Null 80180
+--PAN_CARD_ID
+select count(*) from POC_Data_Final_ where PAN_CARD_ID like '' -- Null 55517
+select count(*) from POC_Data_Final_ where PAN_CARD_ID like '%_' -- Not Null 170131
+select count(DISTINCT (PAN_CARD_ID)) from POC_Data_Final_ where PAN_CARD_ID not like '' -- distinct records 60716
+--CUS_DOB
+select count(*) from POC_Data_Final_ where CUS_DOB like '' -- null 439
+select count(*) from POC_Data_Final_ where CUS_DOB not like '' -- not null 225209
+
+SELECT COUNT(*) from POC_Data_Final_ where CLI_GNDR like ''
+
+
+
+
+
+
+
+
+
+
+
