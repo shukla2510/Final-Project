@@ -1,4 +1,4 @@
-SELECT * from POC_Data_Final_Edited 
+SELECT count(*) from POC_Data_Final_Edited --50625
 
 --CUS_DOB
 select count(*) from POC_Data_Final_Edited where CUS_DOB like '' -- null 439
@@ -6,10 +6,12 @@ select count(*) from POC_Data_Final_Edited where CUS_DOB not like '' -- not null
 --CORRECT_MOBILE
 select count(*) from POC_Data_Final_Edited where CORRECT_MOBILE like '%_' --Not Null 145468
 select count(*) from POC_Data_Final_Edited where CORRECT_MOBILE like '' -- Null 80180
+select count(DISTINCT (CORRECT_MOBILE )) from POC_Data_Final_Edited where CORRECT_MOBILE like '%_' -- 50625
 --CUS_MAIL_ID_1
 select count(*) from POC_Data_Final_Edited where CUS_MAIL_ID_1 not like '%_@%.%' and CUS_MAIL_ID_1 not like '' --Incorrect 12
 select count(*) from POC_Data_Final_Edited where CUS_MAIL_ID_1  like '%_@%.%' -- not Null 107071
 select count(*) from POC_Data_Final_Edited where CUS_MAIL_ID_1 like ''  --Null 118565
+select COUNT( DISTINCT (CUS_MAIL_ID_1)) from POC_Data_Final_Edited where CUS_MAIL_ID_1  like '%_@%.%' --distinct 36734
 --PAN_CARD_ID
 select count(*) from POC_Data_Final_Edited where PAN_CARD_ID like '' -- Null 55517
 select count(*) from POC_Data_Final_Edited where PAN_CARD_ID like '%_' -- Not Null 170131
@@ -17,9 +19,11 @@ select count(DISTINCT (PAN_CARD_ID)) from POC_Data_Final_Edited where PAN_CARD_I
 --CLI_GNDR
 SELECT COUNT(*) from POC_Data_Final_Edited where CLI_GNDR not like '' -- NOt null 225642
 SELECT COUNT(*) from POC_Data_Final_Edited where CLI_GNDR like '' -- Null 6
+SELECT count(DISTINCT (CLI_GNDR))from POC_Data_Final_Edited where CLI_GNDR not like '' -- 8
 --CLI_MOBILE_NUMBER
 SELECT COUNT(*) from POC_Data_Final_Edited where CLI_MOBILE_NUMBER like '' --84101
 SELECT COUNT(*) from POC_Data_Final_Edited where CLI_MOBILE_NUMBER not like '' --141547
+SELECT count(DISTINCT (CLI_MOBILE_NUMBER)) from POC_Data_Final_Edited where CLI_MOBILE_NUMBER not like '' --48367
 --ADHAR_NUMBER
 SELECT COUNT(*) from POC_Data_Final_Edited where ADHAR_NUMBER like '' --Null 141508
 SELECT COUNT(*) from POC_Data_Final_Edited where ADHAR_NUMBER not like '' --  Not Null 84140
